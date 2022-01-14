@@ -29,7 +29,7 @@ router.get('/', auth, async(req, res) => {
 //@desc authenticate user & get token
 //access public
 router.post('/', [
-    check('email', 'Se requiere su email para iniciar sesión 😔👌').isEmail(),
+    check('correo', 'Se requiere su email para iniciar sesión 😔👌').isEmail(),
     check('password', 'No sea !#$ como quiere iniciar sesión sin su contraseña? 😒').exists()
 ],
 async(req, res) => {
@@ -38,11 +38,11 @@ async(req, res) => {
         return res.status(400).json({errors: errors.array()});
     }
 
-    const {email, password} = req.body;
+    const {correo, password} = req.body;
 
     try {
         //Verify if user exists
-        let user = await User.findOne({email});
+        let user = await User.findOne({correo});
 
         if(!user){
             return res.status(400).json({errors: [{msg: "Credenciales inválidas"}]});

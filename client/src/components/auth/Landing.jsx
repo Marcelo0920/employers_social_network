@@ -1,10 +1,13 @@
 import React, {Fragment, useState} from 'react';
+import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
-import Login from './Login';
+import AuthenticateMode from './AuthenticateMode';
 import LoginEmpresa from './LoginEmpresa';
 
-const Landing = () => {
+const Landing = ({isAuthenticated}) => {
 
     const [empresa, setEmpresa] = useState(true);
 
@@ -12,6 +15,11 @@ const Landing = () => {
         setEmpresa(!empresa);
     }
     
+    //REDIRECT IF LOGGED IN
+
+    if(isAuthenticated){
+        return <Navigate to = "/" />
+    }
 
     return(
         <Fragment>
@@ -36,7 +44,7 @@ const Landing = () => {
                             <a  className='centrado' onClick={() => setLogin()} >Cambiar inicio de sesión</a>
                             <div className="login-reg-bg">
                                 
-                                {empresa === true && <Login /> }
+                                {empresa === true && <AuthenticateMode /> }
                                 {empresa === false && <LoginEmpresa /> }
                                 
                             </div>
@@ -48,4 +56,12 @@ const Landing = () => {
     )
 }
 
-export default Landing;
+Landing.propTypes = {
+    isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps)(Landing);

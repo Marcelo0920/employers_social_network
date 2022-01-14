@@ -10050,3 +10050,12 @@ aside.sidebar.full-style {
 .espaciado{
     padding: .6rem;
 }
+
+.espacio{
+    margin: 1rem;
+}
+
+.center{
+    margin: 1rem auto;
+    text-align: center;
+}

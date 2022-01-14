@@ -4,7 +4,7 @@ const config = require('config');
 
 module.exports = function(req, res, next){
     //get token from header
-    const token = req.header('x-auth-token-empresa');
+    const token = req.header('x-auth-token');
 
     //check if token doesn't exists
     if(!token){
@@ -17,7 +17,7 @@ module.exports = function(req, res, next){
     try{
         const decoded = jwt.verify(token, config.get('jwtSecret'));
 
-        req.empresa = decoded.empresa;
+        req.empresa = decoded.user;
         next();
     }catch(err){
         res.status(401).json({msg: "El token no es válido >:("})

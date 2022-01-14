@@ -1,10 +1,9 @@
 import React, {Fragment, useState} from 'react';
-import {Navigate, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Login = ({register, isAuthenticated}) => {
+const RegisterCard = ({register}) => {
 
 
     const [formData, setFormData] = useState({
@@ -21,8 +20,6 @@ const Login = ({register, isAuthenticated}) => {
 
     const {nombre, correo, telefono, password, password2, avatar, ci, apellido, genero} = formData;
 
-    const [login, setLogin] = useState(true);
-
 
     const onSubmit = async e => {
         e.preventDefault();
@@ -36,44 +33,8 @@ const Login = ({register, isAuthenticated}) => {
     
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
-    //REDIRECT IF LOGGED IN
-    if(isAuthenticated){
-        return <Navigate to = "/" />
-    }
-
     return(
         <Fragment>
-            {login === true && 
-                <div className="log-reg-area sign">
-                    <h2 className="log-title">Iniciar sesión como Usuario</h2>
-                    <p>
-                    ¿Todavía no nos usas?<a href="#" title>Toma nuestro recorrido</a> o <a href="#" title>Únete ahora</a>
-                    </p>
-                    <form method="post">
-                        <div className="form-group">	
-                            <input type="text" id="input" required="required" />
-                            <label className="control-label" htmlFor="input">Correo Electrónico</label><i className="mtrl-select" />
-                        </div>
-                        <div className="form-group">	
-                            <input type="password" required="required" />
-                            <label className="control-label" htmlFor="input">Contraseña</label><i className="mtrl-select" />
-                        </div>
-                        <div className="checkbox">
-                            <label>
-                            <input type="checkbox" defaultChecked="checked" /><i className="check-box" />Recordarme.
-                            </label>
-                        </div>
-                        <a href="#" title className="forgot-pwd">¿Olvidaste tu contraseña?</a>
-                        <div className="submit-btns">
-                            <button className="mtr-btn signin" type="button"><span><a href="/">Iniciar Sesión</a></span></button>
-                            <button className="mtr-btn signup" type="button" onClick={() => setLogin(false)} ><span>Registrarme</span></button>
-                        </div>
-                    </form>
-                </div>
-            }
-
-
-            {login === false &&
                 <div className="log-reg-area sign">
                     <h2 className="log-title">Regístrate</h2>
                     <p>
@@ -183,25 +144,26 @@ const Login = ({register, isAuthenticated}) => {
                             <input type="checkbox" defaultChecked="checked" /><i className="check-box" />Accept Terms &amp; Conditions ?
                             </label>
                         </div>
-                        <a href="#" title className="already-have" onClick={() => setLogin(true)}>¿Ya tienes una cuenta?</a>
+                        <a href="#" title className="already-have">¿Ya tienes una cuenta?</a>
                         <div className="submit-btns">
                             <button className="mtr-btn signup" type="submit"><span>Registrarme</span></button>
                         </div>
                     </form>
                 </div>
-            }
+            
+
+
          </Fragment>
     )
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+
 })
 
-Login.propTypes = {
-    register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+RegisterCard.propTypes = {
+    register: PropTypes.func.isRequired
 }
 
 
-export default connect(mapStateToProps, {register})(Login);
+export default connect(mapStateToProps, {register})(RegisterCard);
