@@ -12,7 +12,9 @@ const EmpresaSchema = new mongoose.Schema({
     },
     telefono: {
         type: Number,
-        required: true,
+    },
+    tipo: {
+        type: String
     },
     password: {
         type: String,
@@ -23,12 +25,10 @@ const EmpresaSchema = new mongoose.Schema({
         default: Date.now
     },
     descripcion: {
-        type: String,
-        required: true,
+        type: String
     },
     ubicacion: {
-        type: String,
-        required: true
+        type: String
     },
     twitter: {
         type: String

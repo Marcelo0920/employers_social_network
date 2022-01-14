@@ -7,11 +7,11 @@ const PostulacionSchema = new mongoose.Schema({
     },
     empresa: {
         type: mongoose.Schema.Types.ObjectId,
-        refers: 'empresas'
+        refers: 'empresa'
     },
     empleado: {
         type: mongoose.Schema.Types.ObjectId,
-        refers: 'users'
+        refers: 'user'
     }
 })
 

@@ -27,7 +27,7 @@ async(req, res) => {
         return res.status(400).json({errors: errors.array()});
     }
 
-    const {nombre, correo, telefono, password, descripcion, ubicacion, twitter, facebook, instagram, web} = req.body;
+    const {nombre, tipo, correo, telefono, password, descripcion, ubicacion, twitter, facebook, instagram, web} = req.body;
 
     try {
         //check if the bussiness exists
@@ -45,6 +45,7 @@ async(req, res) => {
             password,
             descripcion,
             ubicacion,
+            tipo,
             twitter,
             facebook,
             instagram,

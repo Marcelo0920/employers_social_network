@@ -6,7 +6,7 @@ const FotoSchema = new mongoose.Schema({
     },
     empresa: {
         type: mongoose.Schema.Types.ObjectId,
-        refers: 'empresas'
+        refers: 'empresa'
     }
 })
 

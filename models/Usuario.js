@@ -24,8 +24,29 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
+    cover: {
+        type: String
+    },
     genero: {
         type: String
+    },
+    ubicacion: {
+        type: String
+    },
+    website: {
+        type: String
+    },
+    facebook: {
+        type: String,
+        default: "https://www.facebook.com/"
+    },
+    twitter: {
+        type: String,
+        default: "https://twitter.com/"
+    },
+    instagram: {
+        type: String,
+        default: "https://www.instagram.com/"
     },
     estudios: [
         {

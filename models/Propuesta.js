@@ -27,11 +27,11 @@ const PropuestaSchema = new mongoose.Schema({
     },
     empresa: {
         type: mongoose.Schema.Types.ObjectId,
-        refers: 'empresas'
+        refers: 'empresa'
     },
     area: {
         type: mongoose.Schema.Types.ObjectId,
-        refers: 'areas'
+        refers: 'area'
     }
 })
 

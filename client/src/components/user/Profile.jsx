@@ -1,25 +1,23 @@
 import React, {useState} from 'react';
 
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import timeline_1 from "../../images/resources/timeline-1.jpg";
-
 import user_avatar from "../../images/resources/user-avatar.jpg";
-
-
 import TimeLine from '../profile/TimeLine';
 import EditProfile from '../profile/EditProfile';
-import FriendsList from '../profile/FriendsList';
 import Ad from '../profile/Ad';
 import Navbar from '../navbar/Navbar';
 import SocialLinks from './SocialLinks';
 import BasicInfo from './BasicInfo';
 import RecentActivity from './RecentActivity';
-import Likers from './Likers';
 import Footer from '../Footer/Footer';
 
 
 
 
-const Profile = () => {
+const Profile = ({auth}) => {
 
     const Page = ["TimeLine", "EditProfile"];
     const [myPage, setMyPage] = useState("TimeLine");
@@ -65,7 +63,7 @@ const Profile = () => {
                                 <div className="timeline-info">
                                     <ul>
                                     <li className="admin-name">
-                                        <h5>Janice Griffith</h5>
+                                        <h5>{auth.user.nombre}{' '}{auth.user.apellido}</h5>
                                         <span>Group Admin</span>
                                     </li>
                                     <li>
@@ -131,72 +129,17 @@ const Profile = () => {
                 {/* footer */}
                 
             </div>
-            <div className="side-panel">
-                <h4 className="panel-title">General Setting</h4>
-                <form method="post">
-                <div className="setting-row">
-                    <span>use night mode</span>
-                    <input type="checkbox" id="nightmode1" /> 
-                    <label htmlFor="nightmode1" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                <div className="setting-row">
-                    <span>Notifications</span>
-                    <input type="checkbox" id="switch22" /> 
-                    <label htmlFor="switch22" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                <div className="setting-row">
-                    <span>Notification sound</span>
-                    <input type="checkbox" id="switch33" /> 
-                    <label htmlFor="switch33" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                <div className="setting-row">
-                    <span>My profile</span>
-                    <input type="checkbox" id="switch44" /> 
-                    <label htmlFor="switch44" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                <div className="setting-row">
-                    <span>Show profile</span>
-                    <input type="checkbox" id="switch55" /> 
-                    <label htmlFor="switch55" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                </form>
-                <h4 className="panel-title">Account Setting</h4>
-                <form method="post">
-                <div className="setting-row">
-                    <span>Sub users</span>
-                    <input type="checkbox" id="switch66" /> 
-                    <label htmlFor="switch66" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                <div className="setting-row">
-                    <span>personal account</span>
-                    <input type="checkbox" id="switch77" /> 
-                    <label htmlFor="switch77" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                <div className="setting-row">
-                    <span>Business account</span>
-                    <input type="checkbox" id="switch88" /> 
-                    <label htmlFor="switch88" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                <div className="setting-row">
-                    <span>Show me online</span>
-                    <input type="checkbox" id="switch99" /> 
-                    <label htmlFor="switch99" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                <div className="setting-row">
-                    <span>Delete history</span>
-                    <input type="checkbox" id="switch101" /> 
-                    <label htmlFor="switch101" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                <div className="setting-row">
-                    <span>Expose author name</span>
-                    <input type="checkbox" id="switch111" /> 
-                    <label htmlFor="switch111" data-on-label="ON" data-off-label="OFF" />
-                </div>
-                </form>
-            </div>
         </div>
 
     )
 }
 
-export default Profile;
+Profile.propTypes = {
+    auth: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, {})(Profile);

@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const {check, validationResult} = require('express-validator');
+const auth = require('../../middleware/authUser');
 
 
 const User = require('../../models/Usuario');
@@ -82,5 +83,19 @@ async(req, res) => {
         res.status(500).send('Server Error');
     }
 })
+
+//route UPDATE api/users/photo
+//@desc update user profile pic
+//access private
+
+router.put('/updateavatar', auth, async(req, res) => {
+    User.findByIdAndUpdate(req.user._id, {$set:{avatar: req.body.avatar}},{new: true}, (err, result) => {
+        if(err){
+            return res.status(500).json({error: "Server Error"})
+        }
+        res.json(result)
+    })
+})
+
 
 module.exports = router;
