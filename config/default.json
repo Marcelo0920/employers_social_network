@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://maru:defining_database_23@cluster0.g4h9m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret": "AttackOnTitanSeason4"
+}
